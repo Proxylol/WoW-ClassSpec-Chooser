@@ -2,7 +2,7 @@ from tkinter import *
 import random
 
 def classPick():
-    classRNG = random.randint(1,8)
+    classRNG = random.randint(1,12)
     if classRNG == 1:
         choice = "Warrior"
     elif classRNG == 2:
