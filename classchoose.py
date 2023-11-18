@@ -1,174 +1,63 @@
-from tkinter import *
+import tkinter as tk
 import random
 
-def classPick():
-    classRNG = random.randint(1,12)
-    if classRNG == 1:
-        choice = "Warrior"
-    elif classRNG == 2:
-        choice = "Paladin"
-    elif classRNG == 3:
-        choice = "Hunter"
-    elif classRNG == 4:
-        choice = "Rogue"
-    elif classRNG == 5:
-        choice = "Priest"
-    elif classRNG == 6:
-        choice = "Death Knight"
-    elif classRNG == 7:
-        choice = "Shaman"
-    elif classRNG == 8:
-        choice = "Mage"
-    elif classRNG == 9:
-        choice = "Warlock"
-    elif classRNG == 10:
-        choice = "Monk"
-    elif classRNG == 11:
-        choice = "Druid"
-    elif classRNG == 12:
-        choice = "Demon Hunter"
-    return choice
 
-def spec(choice):
+class CharacterGenerator:
+    def __init__(self, root):
+        self.root = root
+        self.root.configure(bg="dark gray")
 
-    classChoice = choice
+        self.label_class = tk.Label(root, bg="dark gray", text="Class")
+        self.label_class.grid(row=0, column=0, pady=2)
 
-    if classChoice == "Warrior":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Protection"
-        elif specRNG == 2:
-            specChoice = "Arms"
-        elif specRNG == 3:
-            specChoice = "Fury"
-    elif classChoice == "Paladin":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Protection"
-        elif specRNG == 2:
-            specChoice = "Holy"
-        elif specRNG ==3:
-            specChoice = "Retribution"
-    elif classChoice == "Hunter":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Marksman"
-        if specRNG == 2:
-            specChoice = "Beast Mastery"
-        if specRNG == 3:
-            specChoice = "Survival"
-    elif classChoice == "Rogue":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Assassination"
-        if specRNG == 2:
-            specChoice = "Subtlety"
-        if specRNG == 3:
-            specChoice = "Outlaw"
-    elif classChoice == "Priest":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Holy"
-        if specRNG == 2:
-            specChoice = "Discipline"
-        if specRNG == 3:
-            specChoice = "Shadow"
-    elif classChoice == "Death Knight":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Unholy"
-        if specRNG == 2:
-            specChoice = "Frost"
-        if specRNG == 3:
-            specChoice = "Blood"
-    elif classChoice == "Shaman":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Elemental"
-        if specRNG == 2:
-            specChoice = "Enhancement"
-        if specRNG == 3:
-            specChoice = "Restoration"
-    elif classChoice == "Mage":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Fire"
-        if specRNG == 2:
-            specChoice = "Frost"
-        if specRNG == 3:
-            specChoice = "Arcane"
-    elif classChoice == "Warlock":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Demonology"
-        if specRNG == 2:
-            specChoice = "Destruction"
-        if specRNG == 3:
-            specChoice = "Affliction"
-    elif classChoice == "Monk":
-        specRNG = random.randint(1,3)
-        if specRNG == 1:
-            specChoice = "Mistweaver"
-        if specRNG == 2:
-            specChoice = "Brewmaster"
-        if specRNG == 3:
-            specChoice = "Windwalker"
-    elif classChoice == "Druid":
-        specRNG = random.randint(1,4)
-        if specRNG == 1:
-            specChoice = "Feral"
-        if specRNG == 2:
-            specChoice = "Balance"
-        if specRNG == 3:
-            specChoice = "Guardian"
-        if specRNG == 4:
-            specChoice = "Restoration"
-    elif classChoice == "Demon Hunter":
-        specRNG = random.randint(1,2)
-        if specRNG == 1:
-            specChoice = "Havoc"
-        if specRNG == 2:
-            specChoice = "Vengeance"
-    return specChoice
-      
+        self.label_spec = tk.Label(root, bg="dark gray", text="Spec")
+        self.label_spec.grid(row=2, column=0, pady=2)
 
-def specandclass():
-    classChoice = classPick()
-    if classChoice == "Warrior":
-        labelClass.config(fg="brown", bg="dark gray", text=classChoice)
-    elif classChoice == "Paladin":
-        labelClass.config(fg="pink", bg="dark gray", text=classChoice)
-    elif classChoice == "Hunter":
-        labelClass.config(fg="green", bg="dark gray", text=classChoice)
-    elif classChoice == "Rogue":
-        labelClass.config(fg="yellow", bg="dark gray", text=classChoice)
-    elif classChoice == "Priest":
-        labelClass.config(fg="white", bg="dark gray", text=classChoice)
-    elif classChoice == "Death Knight":
-        labelClass.config(fg="red", bg="dark gray", text=classChoice)
-    elif classChoice == "Shaman":
-        labelClass.config(fg="blue", bg="dark gray", text=classChoice)
-    elif classChoice == "Mage":
-        labelClass.config(fg="light blue", bg="dark gray", text=classChoice)
-    elif classChoice == "Warlock":
-        labelClass.config(fg="purple", bg="dark gray", text=classChoice)
-    elif classChoice == "Monk":
-        labelClass.config(fg="light green", bg="dark gray", text=classChoice)
-    elif classChoice == "Demon Hunter":
-        labelClass.config(fg="purple", bg="dark gray", text=classChoice)
-    labelClass.config(text=classChoice)
-    specChoice = spec(classChoice)
-    labelSpec.config(text=specChoice)
+        self.button_generate = tk.Button(
+            root, text="Choose Class / Spec", command=self.generate_character)
+        self.button_generate.grid(row=3, column=0, pady=20)
+
+    def choose_class(self):
+        classes = ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Death Knight",
+                   "Shaman", "Mage", "Warlock", "Monk", "Druid", "Demon Hunter", "Evoker"]
+        return random.choice(classes)
+
+    def choose_spec(self, class_choice):
+        specs_by_class = {
+            "Warrior": ["Protection", "Arms", "Fury"],
+            "Paladin": ["Protection", "Holy", "Retribution"],
+            "Hunter": ["Marksman", "Beast Mastery", "Survival"],
+            "Rogue": ["Assassination", "Subtlety", "Outlaw"],
+            "Priest": ["Holy", "Discipline", "Shadow"],
+            "Death Knight": ["Unholy", "Frost", "Blood"],
+            "Shaman": ["Elemental", "Enhancement", "Restoration"],
+            "Mage": ["Fire", "Frost", "Arcane"],
+            "Warlock": ["Demonology", "Destruction", "Affliction"],
+            "Monk": ["Mistweaver", "Brewmaster", "Windwalker"],
+            "Druid": ["Feral", "Balance", "Guardian", "Restoration"],
+            "Demon Hunter": ["Havoc", "Vengeance"],
+            "Evoker": ["Preservation", "Augmentation", "Destruction"]
+        }
+        return random.choice(specs_by_class.get(class_choice, []))
+
+    def update_labels(self, class_choice, spec_choice):
+        class_color_map = {
+            "Warrior": "brown", "Paladin": "pink", "Hunter": "green", "Rogue": "yellow",
+            "Priest": "white", "Death Knight": "red", "Shaman": "blue", "Mage": "light blue",
+            "Warlock": "purple", "Monk": "light green", "Demon Hunter": "purple", "Evoker": "dark green"
+        }
+
+        self.label_class.config(fg=class_color_map.get(
+            class_choice, "white"), text=class_choice)
+        self.label_spec.config(text=spec_choice)
+
+    def generate_character(self):
+        class_choice = self.choose_class()
+        spec_choice = self.choose_spec(class_choice)
+        self.update_labels(class_choice, spec_choice)
 
 
-root = Tk()
-
-root.configure(bg="dark gray")
-labelClass = Label(root, bg="dark gray", text="Class")
-labelClass.grid(row = 0, column = 0, pady = 2)
-labelSpec = Label(root, bg="dark gray", text="Spec")
-labelSpec.grid(row = 2, column = 0, pady = 2)
-b = Button(root, text="Choose Class / Spec", command=specandclass)
-b.grid(row = 3, column = 0, pady = 20)
-
-mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    generator = CharacterGenerator(root)
+    root.mainloop()
